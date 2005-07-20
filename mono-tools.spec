@@ -12,6 +12,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dotnet-gtk-sharp-devel
 BuildRequires:	mono
+BuildRequires:	mono-compat-links
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
 Requires:	monodoc
