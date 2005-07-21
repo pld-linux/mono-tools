@@ -52,7 +52,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/mono
+%{_prefix}/lib/mono/1.0/*
+%{_prefix}/lib/mono/2.0/*
 %{_libdir}/monodoc/browser.exe
 %{_desktopdir}/*
 %{_pixmapsdir}/*
