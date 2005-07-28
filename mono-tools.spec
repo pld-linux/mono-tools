@@ -51,7 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/gasnview
+%attr(755,root,root) %{_bindir}/gnunit
+%attr(755,root,root) %{_bindir}/gnunit2
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
 %{_libdir}/monodoc/browser.exe
