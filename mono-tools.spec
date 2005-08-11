@@ -16,7 +16,7 @@ BuildRequires:	mono
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
-BuildRequires:	rpm-build >= 4.4.2-0.3
+BuildRequires:	rpmbuild(monoautodeps)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
