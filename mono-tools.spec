@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
@@ -15,7 +16,7 @@ BuildRequires:	mono
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc
 BuildRequires:	pkgconfig
-Requires:	monodoc
+BuildRequires:	rpm-build >= 4.4.2-0.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
