@@ -3,7 +3,7 @@ Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
 Version:	1.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
@@ -58,6 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnunit2
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
-%{_libdir}/monodoc/browser.exe
+%{_prefix}/lib/monodoc/browser.exe
 %{_desktopdir}/*
 %{_pixmapsdir}/*
