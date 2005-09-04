@@ -15,7 +15,7 @@ BuildRequires:	dotnet-gtk-sharp-devel
 BuildRequires:	dotnet-gtk-sharp-gnome-devel
 BuildRequires:	mono
 BuildRequires:	mono-compat-links
-BuildRequires:	monodoc
+BuildRequires:	monodoc >= 1.0.7
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
