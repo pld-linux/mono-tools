@@ -2,12 +2,12 @@
 Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
-Version:	1.0
-Release:	3
+Version:	1.1.9
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	9e7db3d6c56226f237b34cb0cd8763d3
+# Source0-md5:	52797a026f99a6e6fb235dc36240e797
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -49,6 +49,11 @@ install -d $RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+echo "Please wait, generating index..."
+/usr/bin/monodoc --make-index >/dev/null 2>/dev/null || :
+/usr/bin/monodoc --make-search-index >/dev/null 2>/dev/null || :
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
