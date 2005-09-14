@@ -3,7 +3,7 @@ Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
 Version:	1.1.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
@@ -26,6 +26,20 @@ utilities for use with Mono.
 %description -l pl
 Mono Tools jest kolekcj± rozwojowych i testowych programów oraz
 narzêdzi do u¿ycia z Mono.
+
+%package gecko
+Summary:	Gecko based monodoc HTML renderer
+Summary(pl):	Oparty na gecko wy¶wietlacz HTML-a dla monodoc
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+
+%description gecko
+Gecko based monodoc HTML renderer. Used instead of Gtk.HTML based
+renderer.
+
+%description gecko -l pl
+Oparty na gecko wy¶wietlacz HTML-a dla monodoc. Jest u¿ywany zamiast
+wy¶wietlacza opartego na Gtk.HTML.
 
 %prep
 %setup -q
@@ -63,6 +77,9 @@ echo "Please wait, generating index..."
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
 %{_prefix}/lib/monodoc/browser.exe
-%{_prefix}/lib/monodoc/GeckoHtmlRender.dll
 %{_desktopdir}/*
 %{_pixmapsdir}/*
+
+%files gecko
+%defattr(644,root,root,755)
+%{_prefix}/lib/monodoc/GeckoHtmlRender.dll
