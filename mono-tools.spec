@@ -11,9 +11,8 @@ Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dotnet-gtk-sharp-devel
+BuildRequires:	dotnet-gecko-sharp-devel = 0.6
 BuildRequires:	dotnet-gtk-sharp-gnome-devel
-BuildRequires:	mono
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.0.7
 BuildRequires:	pkgconfig
@@ -64,5 +63,6 @@ echo "Please wait, generating index..."
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
 %{_prefix}/lib/monodoc/browser.exe
+%{_prefix}/lib/monodoc/GeckoHtmlRender.dll
 %{_desktopdir}/*
 %{_pixmapsdir}/*
