@@ -36,12 +36,12 @@ Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
 
 %description gecko
-Gecko based monodoc HTML renderer. Used instead of Gtk.HTML based
+Gecko based monodoc HTML renderer. Used instead of GtkHTML based
 renderer.
 
 %description gecko -l pl
 Oparty na gecko wy¶wietlacz HTML-a dla monodoc. Jest u¿ywany zamiast
-wy¶wietlacza opartego na Gtk.HTML.
+wy¶wietlacza opartego na GtkHTML.
 
 %package gtkhtml
 Summary:	GtkHTML based monodoc HTML renderer
@@ -51,12 +51,10 @@ Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
 
 %description gtkhtml
-GtkHTML based monodoc HTML renderer. Used instead of Gtk.HTML based
-renderer.
+GtkHTML based monodoc HTML renderer.
 
 %description gtkhtml -l pl
-Oparty na GtkHTML wy¶wietlacz HTML-a dla monodoc. Jest u¿ywany zamiast
-wy¶wietlacza opartego na Gtk.HTML.
+Oparty na GtkHTML wy¶wietlacz HTML-a dla monodoc.
 
 %prep
 %setup -q
