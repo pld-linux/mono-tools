@@ -18,6 +18,7 @@ BuildRequires:	monodoc >= 1.0.7
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 Requires:	mono-tools-html-renderer
+ExcludeArch:	i386 alpha sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
