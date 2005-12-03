@@ -3,7 +3,7 @@ Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
 Version:	1.1.10
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
@@ -69,10 +69,10 @@ Oparty na GtkHTML wy¶wietlacz HTML-a dla monodoc.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	monodocdir=%{_libdir}/monodoc
 
 %find_lang %{name}
 
@@ -87,14 +87,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnunit2
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
-%{_prefix}/lib/monodoc/browser.exe
+%{_libdir}/monodoc/browser.exe
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files gecko
 %defattr(644,root,root,755)
-%{_prefix}/lib/monodoc/GeckoHtmlRender.dll
+%{_libdir}/monodoc/GeckoHtmlRender.dll
 
 %files gtkhtml
 %defattr(644,root,root,755)
-%{_prefix}/lib/monodoc/GtkHtmlHtmlRender.dll
+%{_libdir}/monodoc/GtkHtmlHtmlRender.dll
