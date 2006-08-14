@@ -3,18 +3,19 @@ Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
 Version:	1.1.11
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
 # Source0-md5:	9331316fcacb07a87a7ce1c8437ad2a9
+Patch0:		%{name}-dotnet2.patch
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dotnet-gecko-sharp-devel = 0.6
-BuildRequires:	dotnet-gtk-sharp-gnome-devel
+BuildRequires:	dotnet-gecko-sharp2-devel >= 0.11
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
 BuildRequires:	mono-compat-links
-BuildRequires:	monodoc >= 1.0.7
+BuildRequires:	monodoc >= 1.1.16
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 Requires:	mono-tools-html-renderer
@@ -59,6 +60,7 @@ Oparty na GtkHTML wy¶wietlacz HTML-a dla monodoc.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__aclocal}
