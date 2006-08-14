@@ -1,0 +1,63 @@
+diff -urN aaa/mono-tools-1.1.11/configure.in mono-tools-1.1.11/configure.in
+--- aaa/mono-tools-1.1.11/configure.in	2005-12-15 20:08:57.000000000 +0100
++++ mono-tools-1.1.11/configure.in	2006-08-14 20:00:54.478597000 +0200
+@@ -37,17 +37,17 @@
+ AC_SUBST(MONODOC_LIBS)
+ 
+ 
+-#PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0 glade-sharp-2.0 gconf-sharp-2.0)
+-PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp glade-sharp gconf-sharp)
++PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0 glade-sharp-2.0 gconf-sharp-2.0)
++#PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp glade-sharp gconf-sharp)
+ AC_SUBST(GTK_SHARP_LIBS)
+ 
+ 
+-PKG_CHECK_MODULES(GTKHTML_SHARP, gtkhtml-sharp, enable_gtkhtml=yes, enable_gtkhtml=no)
++PKG_CHECK_MODULES(GTKHTML_SHARP, gtkhtml-sharp-2.0, enable_gtkhtml=yes, enable_gtkhtml=no)
+ AC_SUBST(GTKHTML_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_GTKHTML, test "x$enable_gtkhtml" = "xyes")
+ 
+ 
+-PKG_CHECK_MODULES(GECKO_SHARP, gecko-sharp = 0.6, enable_gecko=yes, enable_gecko=no)
++PKG_CHECK_MODULES(GECKO_SHARP, gecko-sharp-2.0, enable_gecko=yes, enable_gecko=no)
+ AC_SUBST(GECKO_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_GECKO, test "x$enable_gecko" = "xyes")
+ 
+diff -urN aaa/mono-tools-1.1.11/docbrowser/GeckoHtmlRender.cs mono-tools-1.1.11/docbrowser/GeckoHtmlRender.cs
+--- aaa/mono-tools-1.1.11/docbrowser/GeckoHtmlRender.cs	2005-10-27 20:53:57.000000000 +0200
++++ mono-tools-1.1.11/docbrowser/GeckoHtmlRender.cs	2006-08-14 20:12:42.834866500 +0200
+@@ -193,13 +193,13 @@
+ #else
+ 		string Caption = "Monodoc Printing";
+ 
+-		PrintJob pj = new PrintJob (PrintConfig.Default ());
++		Gnome.PrintJob pj = new Gnome.PrintJob (PrintConfig.Default ());
+ 		PrintDialog dialog = new PrintDialog (pj, Caption, 0);
+ 
+ 		Gtk.HTML gtk_html = new Gtk.HTML (Html);
+ 		gtk_html.PrintSetMaster (pj);
+ 			
+-		PrintContext ctx = pj.Context;
++		Gnome.PrintContext ctx = pj.Context;
+ 		gtk_html.Print (ctx);
+ 
+ 		pj.Close ();
+diff -urN aaa/mono-tools-1.1.11/docbrowser/GtkHtmlHtmlRender.cs mono-tools-1.1.11/docbrowser/GtkHtmlHtmlRender.cs
+--- aaa/mono-tools-1.1.11/docbrowser/GtkHtmlHtmlRender.cs	2005-10-27 18:17:18.000000000 +0200
++++ mono-tools-1.1.11/docbrowser/GtkHtmlHtmlRender.cs	2006-08-14 20:17:00.974999250 +0200
+@@ -108,13 +108,13 @@
+ 
+ 		string Caption = "Monodoc Printing";
+ 
+-		PrintJob pj = new PrintJob (PrintConfig.Default ());
++		Gnome.PrintJob pj = new Gnome.PrintJob (PrintConfig.Default ());
+ 		PrintDialog dialog = new PrintDialog (pj, Caption, 0);
+ 
+ 		Gtk.HTML gtk_html = new Gtk.HTML (Html);
+ 		gtk_html.PrintSetMaster (pj);
+ 			
+-		PrintContext ctx = pj.Context;
++		Gnome.PrintContext ctx = pj.Context;
+ 		gtk_html.Print (ctx);
+ 
+ 		pj.Close ();
