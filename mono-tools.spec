@@ -1,18 +1,21 @@
+#
+# Conditional build:
+%bcond_without	gecko		# don't build gecko html renderer
+#
 %include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
-Version:	1.1.11
-Release:	2
+Version:	1.1.17
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	9331316fcacb07a87a7ce1c8437ad2a9
-Patch0:		%{name}-dotnet2.patch
+# Source0-md5:	5480683e70806f5aa8f9d378ae6a094c
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dotnet-gecko-sharp2-devel >= 0.11
+%{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.11}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.1.16
@@ -60,7 +63,6 @@ Oparty na GtkHTML wy¶wietlacz HTML-a dla monodoc.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__aclocal}
@@ -93,9 +95,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 
+%if %{with gecko}
 %files gecko
 %defattr(644,root,root,755)
 %{_libdir}/monodoc/GeckoHtmlRender.dll
+%endif
 
 %files gtkhtml
 %defattr(644,root,root,755)
