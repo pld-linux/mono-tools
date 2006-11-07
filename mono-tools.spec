@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
 %{_libdir}/monodoc/browser.exe
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 
 %if %{with gecko}
