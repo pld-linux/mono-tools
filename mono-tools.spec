@@ -6,12 +6,12 @@
 Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
-Version:	1.1.17
+Version:	1.2.1
 Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	5480683e70806f5aa8f9d378ae6a094c
+# Source0-md5:	d65587a842799f2e087ef101bcb4c68a
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -86,14 +86,18 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
+%attr(755,root,root) %{_bindir}/create-native-map
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gnunit
 %attr(755,root,root) %{_bindir}/gnunit2
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
+%{_libdir}/create-native-map
 %{_libdir}/monodoc/browser.exe
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
+%{_pkgconfigdir}/*.pc
+%{_mandir}/man1/create-native-map.1*
 
 %if %{with gecko}
 %files gecko
