@@ -4,7 +4,7 @@
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
-Summary(pl):	NarzÍdzia do mono
+Summary(pl.UTF-8):   Narzƒôdzia do mono
 Name:		mono-tools
 Version:	1.2.3
 Release:	1
@@ -29,13 +29,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Mono Tools is a collection of development and testing programs and
 utilities for use with Mono.
 
-%description -l pl
-Mono Tools jest kolekcj± rozwojowych i testowych programÛw oraz
-narzÍdzi do uøycia z Mono.
+%description -l pl.UTF-8
+Mono Tools jest kolekcjƒÖ rozwojowych i testowych program√≥w oraz
+narzƒôdzi do u≈ºycia z Mono.
 
 %package gecko
 Summary:	Gecko based monodoc HTML renderer
-Summary(pl):	Oparty na gecko wy∂wietlacz HTML-a dla monodoc
+Summary(pl.UTF-8):   Oparty na gecko wy≈õwietlacz HTML-a dla monodoc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
@@ -44,13 +44,13 @@ Provides:	mono-tools-html-renderer
 Gecko based monodoc HTML renderer. Used instead of GtkHTML based
 renderer.
 
-%description gecko -l pl
-Oparty na gecko wy∂wietlacz HTML-a dla monodoc. Jest uøywany zamiast
-wy∂wietlacza opartego na GtkHTML.
+%description gecko -l pl.UTF-8
+Oparty na gecko wy≈õwietlacz HTML-a dla monodoc. Jest u≈ºywany zamiast
+wy≈õwietlacza opartego na GtkHTML.
 
 %package gtkhtml
 Summary:	GtkHTML based monodoc HTML renderer
-Summary(pl):	Oparty na GtkHTML wy∂wietlacz HTML-a dla monodoc
+Summary(pl.UTF-8):   Oparty na GtkHTML wy≈õwietlacz HTML-a dla monodoc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
@@ -58,8 +58,8 @@ Provides:	mono-tools-html-renderer
 %description gtkhtml
 GtkHTML based monodoc HTML renderer.
 
-%description gtkhtml -l pl
-Oparty na GtkHTML wy∂wietlacz HTML-a dla monodoc.
+%description gtkhtml -l pl.UTF-8
+Oparty na GtkHTML wy≈õwietlacz HTML-a dla monodoc.
 
 %prep
 %setup -q
