@@ -4,7 +4,7 @@
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
-Summary(pl.UTF-8):   Narzędzia do mono
+Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	1.2.3
 Release:	1
@@ -35,7 +35,7 @@ narzędzi do użycia z Mono.
 
 %package gecko
 Summary:	Gecko based monodoc HTML renderer
-Summary(pl.UTF-8):   Oparty na gecko wyświetlacz HTML-a dla monodoc
+Summary(pl.UTF-8):	Oparty na gecko wyświetlacz HTML-a dla monodoc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
@@ -50,7 +50,7 @@ wyświetlacza opartego na GtkHTML.
 
 %package gtkhtml
 Summary:	GtkHTML based monodoc HTML renderer
-Summary(pl.UTF-8):   Oparty na GtkHTML wyświetlacz HTML-a dla monodoc
+Summary(pl.UTF-8):	Oparty na GtkHTML wyświetlacz HTML-a dla monodoc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
