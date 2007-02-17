@@ -76,7 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	monodocdir=%{_libdir}/monodoc
+	assemblydir=%{_libdir}/create-native-map \
+	monodocdir=%{_libdir}/monodoc \
+	pkgconfigdir=%{_pkgconfigdir}
 
 %find_lang %{name}
 
