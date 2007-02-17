@@ -16,7 +16,7 @@ URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.11}
-BuildRequires:	dotnet-gtk-sharp-gnome-devel
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.1.16
 BuildRequires:	pkgconfig
