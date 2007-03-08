@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl):	Narzêdzia do mono
 Name:		mono-tools
 Version:	1.2.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
