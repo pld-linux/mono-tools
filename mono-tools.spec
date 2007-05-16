@@ -22,6 +22,7 @@ BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.1.16
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
+BuildRequires:	sed >= 4.0
 Requires:	mono-tools-html-renderer
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -65,6 +66,9 @@ Oparty na GtkHTML wyświetlacz HTML-a dla monodoc.
 %prep
 %setup -q
 
+# as expected by ilcontrast script
+sed -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
+
 %build
 %{__aclocal}
 %{__autoconf}
@@ -77,7 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	assemblydir=%{_libdir}/create-native-map \
 	monodocdir=%{_libdir}/monodoc \
 	pkgconfigdir=%{_pkgconfigdir}
 
@@ -93,11 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gnunit
 %attr(755,root,root) %{_bindir}/gnunit2
-%attr(755,root,root) %{_bindir}/ilcontrast
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
-%{_libdir}/create-native-map
-%{_libdir}/ilcontrast
+%{_prefix}/lib/create-native-map
 %{_libdir}/monodoc/browser.exe
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
@@ -107,6 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gecko}
 %files gecko
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/ilcontrast
+%{_prefix}/lib/ilcontrast
 %{_libdir}/monodoc/GeckoHtmlRender.dll
 %endif
 
