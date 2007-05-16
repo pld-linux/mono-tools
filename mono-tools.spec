@@ -6,12 +6,13 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	1.2.3
-Release:	2
+Version:	1.2.4
+Release:	1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	c52378128076b57ee8718ddb16725336
+#Source0Download: http://go-mono.com/sources-stable/
+Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
+# Source0-md5:	7d193fea94123a3f30f67bca2873c791
 URL:		http://www.go-mono.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -92,9 +93,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gnunit
 %attr(755,root,root) %{_bindir}/gnunit2
+%attr(755,root,root) %{_bindir}/ilcontrast
 %{_prefix}/lib/mono/1.0/*
 %{_prefix}/lib/mono/2.0/*
 %{_libdir}/create-native-map
+%{_libdir}/ilcontrast
 %{_libdir}/monodoc/browser.exe
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
