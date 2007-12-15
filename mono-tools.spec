@@ -6,20 +6,20 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	1.2.4
+Version:	1.2.6
 Release:	1
-License:	GPL
+License:	GPL v2
 Group:		Development/Tools
 #Source0Download: http://go-mono.com/sources-stable/
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	7d193fea94123a3f30f67bca2873c791
-URL:		http://www.go-mono.com/
+# Source0-md5:	979aa2b947f1af8c181050aec3685125
+URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.11}
-BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
+%{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.12}
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	mono-compat-links
-BuildRequires:	monodoc >= 1.1.16
+BuildRequires:	monodoc >= 1.2.6
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
@@ -96,13 +96,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gnunit
 %attr(755,root,root) %{_bindir}/gnunit2
-%{_prefix}/lib/mono/1.0/*
-%{_prefix}/lib/mono/2.0/*
+%{_prefix}/lib/mono/1.0/gasnview.exe
+%{_prefix}/lib/mono/1.0/gnunit.exe
+%{_prefix}/lib/mono/2.0/gnunit2.exe
 %{_prefix}/lib/create-native-map
 %{_libdir}/monodoc/browser.exe
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
-%{_pkgconfigdir}/*.pc
+%{_desktopdir}/monodoc.desktop
+%{_pixmapsdir}/monodoc.png
+%{_pkgconfigdir}/create-native-map.pc
 %{_mandir}/man1/create-native-map.1*
 
 %if %{with gecko}
@@ -111,6 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ilcontrast
 %{_prefix}/lib/ilcontrast
 %{_libdir}/monodoc/GeckoHtmlRender.dll
+%{_desktopdir}/ilcontrast.desktop
+%{_pixmapsdir}/ilcontrast.png
 %endif
 
 %files gtkhtml
