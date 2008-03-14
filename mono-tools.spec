@@ -6,13 +6,13 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	1.2.6
+Version:	1.9
 Release:	1
 License:	GPL v2
 Group:		Development/Tools
 #Source0Download: http://go-mono.com/sources-stable/
 Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	979aa2b947f1af8c181050aec3685125
+# Source0-md5:	f00eb74bd0f467f81fad3ab62e215e1a
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -20,6 +20,7 @@ BuildRequires:	automake
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.2.6
+BuildRequires:	mono-jscript
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
@@ -62,6 +63,36 @@ GtkHTML based monodoc HTML renderer.
 
 %description gtkhtml -l pl.UTF-8
 Oparty na GtkHTML wyświetlacz HTML-a dla monodoc.
+
+%package gendarme
+Summary:	A tool to find problems in .NET applications and libraries
+Summary(pl.UTF-8):	Narzędzie znajdujące problemy w aplikacjach i bibliotekach .NET
+Group:		Development/Tools
+
+%description gendarme
+Gendarme is a extensible rule-based tool to find problems in .NET
+applications and libraries. Gendarme inspects programs and libraries
+that contain code in ECMA CIL format (Mono and .NET) and looks for
+common problems with the code, problems that compiler do not typically
+check or have not historically checked.
+
+%description gendarme -l pl.UTF-8
+Gendarme to rozszerzalne narzędzie oparte o regułki, znajdujące
+problemy w aplikacjach i bibliotekach .NET. Gendarme przeprowadza
+inspekcję programów i bibliotek w formacie ECMA CIL (Mono i .NET)
+szukając typowych problemów, których często kompilator nie sprawdza,
+lub tych które nie były kiedyś sprawdzane.
+
+%package gui-compare
+Summary:	Compares API changes between different assemblies
+Summary(pl.UTF-8):	Porównuje zmiany API między różnymi assembly
+Group:		Development/Tools
+
+%description gui-compare
+Compares API changes between different assemblies.
+
+%description gui-compare -l pl.UTF-8
+Porównuje zmiany API między różnymi assembly.
 
 %prep
 %setup -q
@@ -119,3 +150,15 @@ rm -rf $RPM_BUILD_ROOT
 %files gtkhtml
 %defattr(644,root,root,755)
 %{_libdir}/monodoc/GtkHtmlHtmlRender.dll
+
+%files gendarme
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gendarme
+%{_prefix}/lib/gendarme
+%{_pkgconfigdir}/gendarme-framework.pc
+%{_mandir}/man1/gendarme.1*
+
+%files gui-compare
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gui-compare
+%{_prefix}/lib/gui-compare
