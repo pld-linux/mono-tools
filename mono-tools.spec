@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	1.9
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Development/Tools
 #Source0Download: http://go-mono.com/sources-stable/
@@ -18,6 +18,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.12}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	dotnet-gnome-desktop-sharp-devel
 BuildRequires:	mono-compat-links
 BuildRequires:	monodoc >= 1.2.6
 BuildRequires:	mono-jscript
