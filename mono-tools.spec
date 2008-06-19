@@ -10,8 +10,8 @@ Version:	1.9
 Release:	3
 License:	GPL v2
 Group:		Development/Tools
-#Source0Download: http://go-mono.com/sources-stable/
-Source0:	http://go-mono.com/sources/mono-tools/%{name}-%{version}.tar.bz2
+# latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
+Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
 # Source0-md5:	f00eb74bd0f467f81fad3ab62e215e1a
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
