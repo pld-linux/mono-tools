@@ -6,21 +6,22 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	1.9
-Release:	3
+Version:	2.0
+Release:	1
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	f00eb74bd0f467f81fad3ab62e215e1a
+# Source0-md5:	955025ab9b25bc58058facc39ab88aae
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.12}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gnome-desktop-sharp-devel
+BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
 BuildRequires:	mono-compat-links
-BuildRequires:	monodoc >= 1.2.6
+BuildRequires:	monodoc >= 2.0
 BuildRequires:	mono-jscript
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
@@ -45,12 +46,36 @@ Requires:	%{name} = %{version}-%{release}
 Provides:	mono-tools-html-renderer
 
 %description gecko
-Gecko based monodoc HTML renderer. Used instead of GtkHTML based
-renderer.
+Gecko based monodoc HTML renderer.
 
 %description gecko -l pl.UTF-8
-Oparty na gecko wyświetlacz HTML-a dla monodoc. Jest używany zamiast
-wyświetlacza opartego na GtkHTML.
+Oparty na gecko wyświetlacz HTML-a dla monodoc.
+
+%package webkit
+Summary:	WebKit based monodoc HTML renderer
+Summary(pl.UTF-8):	Oparty na WebKit wyświetlacz HTML-a dla monodoc
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+Provides:	mono-tools-html-renderer
+
+%description webkit
+WebKit based monodoc HTML renderer.
+
+%description webkit -l pl.UTF-8
+Oparty na WebKit wyświetlacz HTML-a dla monodoc.
+
+%package monowebbrowser
+Summary:	Mono.WebBrowser based monodoc HTML renderer
+Summary(pl.UTF-8):	Oparty na Mono.WebBrowser wyświetlacz HTML-a dla monodoc
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+Provides:	mono-tools-html-renderer
+
+%description monowebbrowser
+Mono.WebBrowser based monodoc HTML renderer.
+
+%description monowebbrowser -l pl.UTF-8
+Oparty na Mono.WebBrowser wyświetlacz HTML-a dla monodoc.
 
 %package gtkhtml
 Summary:	GtkHTML based monodoc HTML renderer
@@ -94,6 +119,36 @@ Compares API changes between different assemblies.
 
 %description gui-compare -l pl.UTF-8
 Porównuje zmiany API między różnymi assembly.
+
+%package mprof-decoder
+Summary:	Console decoder for the logging profiler output files
+Summary(pl.UTF-8):	Konsolowy dekoder dla plików tworzonych przez logujący profiler
+Group:		Development/Tools
+
+%description mprof-decoder
+Decodes the contents of a logging profiler output file and prints the
+data on standard output.
+
+%description mprof-decoder -l pl.UTF-8
+Dekoduje zawartość pliku wynikowego profilera logującego i wypisuje
+dane na standardowe wyjście.
+
+%package mprof-heap-viewer
+Summary:	GUI viewer for the logging profiler heap snapshots
+Summary(pl.UTF-8):	Narzędzie do oglądania migawek sterty profilera logującego
+Group:		Development/Tools
+
+%description mprof-heap-viewer
+This program decodes the contents of a logging profiler output file and
+locates all the heap snapshots inside it. The user can then select each
+individual snapshot and decide to load it in memory and explore its
+contents.
+
+%description mprof-heap-viewer -l pl.UTF-8
+Ten program dekoduje plik wynikowy profilera logującego i lokalizuje
+wszystkie znajdujące się w nim migawki sterty. Umożliwia wybranie
+dowolnej migawki i załadowanie jej do pamięci w celu obejrzenia
+zawartości.
 
 %prep
 %setup -q
@@ -148,6 +203,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/ilcontrast.png
 %endif
 
+%files webkit
+%defattr(644,root,root,755)
+%{_libdir}/monodoc/WebKitHtmlRender.dll
+
+%files monowebbrowser
+%defattr(644,root,root,755)
+%{_libdir}/monodoc/MonoWebBrowserHtmlRender.dll
+
 %files gtkhtml
 %defattr(644,root,root,755)
 %{_libdir}/monodoc/GtkHtmlHtmlRender.dll
@@ -155,6 +218,7 @@ rm -rf $RPM_BUILD_ROOT
 %files gendarme
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gendarme
+%attr(755,root,root) %{_bindir}/gendarme-wizard
 %{_prefix}/lib/gendarme
 %{_pkgconfigdir}/gendarme-framework.pc
 %{_mandir}/man1/gendarme.1*
@@ -163,3 +227,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gui-compare
 %{_prefix}/lib/gui-compare
+
+%files mprof-decoder
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/mprof-decoder
+%{_prefix}/lib/mono-tools/mprof-decoder-library.*
+%{_prefix}/lib/mono-tools/mprof-decoder.*
+%{_mandir}/man1/mprof-decoder.1*
+
+%files mprof-heap-viewer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/mprof-heap-viewer
+%{_prefix}/lib/mono-tools/mprof-heap-snapshot-explorer.*
+%{_prefix}/lib/mono-tools/mprof-heap-viewer.*
+%{_mandir}/man1/mprof-heap-viewer.1*
+%{_desktopdir}/mprof-heap-viewer.desktop
