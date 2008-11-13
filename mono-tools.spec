@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.0
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
