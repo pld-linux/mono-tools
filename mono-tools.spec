@@ -6,23 +6,26 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	2.0
-Release:	3
+Version:	2.6.1
+Release:	1
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	955025ab9b25bc58058facc39ab88aae
+# Source0-md5:	b16305c2dbbc53211018ed07364abccf
+Patch0:		%{name}-pwd.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.12}
-BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gnome-desktop-sharp-devel
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
 BuildRequires:	mono-compat-links
-BuildRequires:	monodoc >= 2.0
+BuildRequires:	mono-devel >= 2.6
 BuildRequires:	mono-jscript
+BuildRequires:	monodoc >= 2.6
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
@@ -139,10 +142,10 @@ Summary(pl.UTF-8):	Narzędzie do oglądania migawek sterty profilera logującego
 Group:		Development/Tools
 
 %description mprof-heap-viewer
-This program decodes the contents of a logging profiler output file and
-locates all the heap snapshots inside it. The user can then select each
-individual snapshot and decide to load it in memory and explore its
-contents.
+This program decodes the contents of a logging profiler output file
+and locates all the heap snapshots inside it. The user can then select
+each individual snapshot and decide to load it in memory and explore
+its contents.
 
 %description mprof-heap-viewer -l pl.UTF-8
 Ten program dekoduje plik wynikowy profilera logującego i lokalizuje
@@ -152,6 +155,7 @@ zawartości.
 
 %prep
 %setup -q
+%patch0 -p1
 
 # as expected by ilcontrast script
 sed -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
@@ -161,7 +165,7 @@ sed -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefil
 %{__autoconf}
 %{__automake}
 %configure
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -180,18 +184,33 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/create-native-map
+%attr(755,root,root) %{_bindir}/emveepee
 %attr(755,root,root) %{_bindir}/gasnview
-%attr(755,root,root) %{_bindir}/gnunit
-%attr(755,root,root) %{_bindir}/gnunit2
-%{_prefix}/lib/mono/1.0/gasnview.exe
-%{_prefix}/lib/mono/1.0/gnunit.exe
-%{_prefix}/lib/mono/2.0/gnunit2.exe
+%attr(755,root,root) %{_bindir}/gsharp
+%attr(755,root,root) %{_bindir}/minvoke
+%attr(755,root,root) %{_bindir}/monodoc
+%attr(755,root,root) %{_bindir}/mperfmon
+%dir %{_prefix}/lib/gsharp
+%attr(755,root,root) %{_prefix}/lib/gsharp/gsharp.exe
+%{_prefix}/lib/gsharp/gsharp.exe.config
+%attr(755,root,root) %{_prefix}/lib/mono/1.0/gasnview.exe
 %{_prefix}/lib/create-native-map
+%dir %{_prefix}/lib/minvoke
+%attr(755,root,root) %{_prefix}/lib/minvoke/minvoke.exe
+%dir %{_prefix}/lib/mperfmon
+%{_prefix}/lib/mperfmon/config
+%attr(755,root,root) %{_prefix}/lib/mperfmon/mperfmon.exe
+%dir %{_prefix}/lib/mono-tools
+%{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll
+%attr(755,root,root) %{_prefix}/lib/mono-tools/emveepee.exe
 %{_libdir}/monodoc/browser.exe
+%{_libdir}/monodoc/web
+%{_desktopdir}/gsharp.desktop
 %{_desktopdir}/monodoc.desktop
 %{_pixmapsdir}/monodoc.png
 %{_pkgconfigdir}/create-native-map.pc
 %{_mandir}/man1/create-native-map.1*
+%{_mandir}/man1/mperfmon.1*
 
 %if %{with gecko}
 %files gecko
@@ -220,8 +239,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gendarme
 %attr(755,root,root) %{_bindir}/gendarme-wizard
 %{_prefix}/lib/gendarme
+%{_libdir}/monodoc/sources/Gendarme*
+%{_libdir}/monodoc/sources/gendarme*
+%{_desktopdir}/gendarme-wizard.desktop
 %{_pkgconfigdir}/gendarme-framework.pc
+%{_pixmapsdir}/gendarme.svg
 %{_mandir}/man1/gendarme.1*
+%{_mandir}/man5/gendarme.5*
 
 %files gui-compare
 %defattr(644,root,root,755)
@@ -241,4 +265,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/mono-tools/mprof-heap-snapshot-explorer.*
 %{_prefix}/lib/mono-tools/mprof-heap-viewer.*
 %{_mandir}/man1/mprof-heap-viewer.1*
-%{_desktopdir}/mprof-heap-viewer.desktop
