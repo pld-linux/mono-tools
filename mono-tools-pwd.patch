@@ -1,0 +1,12 @@
+diff -urN mono-tools-2.6.1/gendarme/rules/common.make mono-tools-2.6.1.new//gendarme/rules/common.make
+--- mono-tools-2.6.1/gendarme/rules/common.make	2009-09-25 17:24:14.000000000 +0200
++++ mono-tools-2.6.1.new//gendarme/rules/common.make	2010-03-10 21:56:50.712592528 +0100
+@@ -5,6 +5,8 @@
+ EXTRA_RULES_OPTIONS := $(GENDARME_OPTIONS)
+ EXTRA_TESTS_OPTIONS := $(TESTS_OPTIONS)
+ 
++PWD = $(shell pwd)
++
+ console_runner=../../bin/gendarme.exe
+ framework=../../bin/Gendarme.Framework.dll
+ common_tests=../Test.Rules/Test.Rules.dll
