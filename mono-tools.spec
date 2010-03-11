@@ -22,6 +22,7 @@ BuildRequires:	dotnet-gnome-desktop-sharp-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
+BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-devel >= 2.6
 BuildRequires:	mono-jscript
