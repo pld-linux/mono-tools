@@ -25,7 +25,7 @@ BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-devel >= 2.6
 BuildRequires:	mono-jscript
-BuildRequires:	monodoc >= 2.6
+BuildRequires:	mono-monodoc >= 2.6
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
