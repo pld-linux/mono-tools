@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.6.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
@@ -98,6 +98,7 @@ Oparty na GtkHTML wyświetlacz HTML-a dla monodoc.
 Summary:	A tool to find problems in .NET applications and libraries
 Summary(pl.UTF-8):	Narzędzie znajdujące problemy w aplikacjach i bibliotekach .NET
 Group:		Development/Tools
+Requires:	monodoc >= 2.6
 
 %description gendarme
 Gendarme is a extensible rule-based tool to find problems in .NET
@@ -173,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	monodocdir=%{_libdir}/monodoc \
+	pkglibdir=%{_prefix}/lib/mono-tools \
 	pkgconfigdir=%{_pkgconfigdir}
 
 %find_lang %{name}
@@ -204,8 +205,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mono-tools
 %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll
 %attr(755,root,root) %{_prefix}/lib/mono-tools/emveepee.exe
-%{_libdir}/monodoc/browser.exe
-%{_libdir}/monodoc/web
+%attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
+%{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
 %{_desktopdir}/monodoc.desktop
 %{_pixmapsdir}/monodoc.png
@@ -218,30 +219,30 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/ilcontrast
 %{_prefix}/lib/ilcontrast
-%{_libdir}/monodoc/GeckoHtmlRender.dll
+%{_prefix}/lib/monodoc/GeckoHtmlRender.dll
 %{_desktopdir}/ilcontrast.desktop
 %{_pixmapsdir}/ilcontrast.png
 %endif
 
 %files webkit
 %defattr(644,root,root,755)
-%{_libdir}/monodoc/WebKitHtmlRender.dll
+%{_prefix}/lib/monodoc/WebKitHtmlRender.dll
 
 %files monowebbrowser
 %defattr(644,root,root,755)
-%{_libdir}/monodoc/MonoWebBrowserHtmlRender.dll
+%{_prefix}/lib/monodoc/MonoWebBrowserHtmlRender.dll
 
 %files gtkhtml
 %defattr(644,root,root,755)
-%{_libdir}/monodoc/GtkHtmlHtmlRender.dll
+%{_prefix}/lib/monodoc/GtkHtmlHtmlRender.dll
 
 %files gendarme
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gendarme
 %attr(755,root,root) %{_bindir}/gendarme-wizard
 %{_prefix}/lib/gendarme
-%{_libdir}/monodoc/sources/Gendarme*
-%{_libdir}/monodoc/sources/gendarme*
+%{_prefix}/lib/monodoc/sources/Gendarme*
+%{_prefix}/lib/monodoc/sources/gendarme*
 %{_desktopdir}/gendarme-wizard.desktop
 %{_pkgconfigdir}/gendarme-framework.pc
 %{_pixmapsdir}/gendarme.svg
