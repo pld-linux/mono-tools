@@ -6,13 +6,13 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	2.6.1
-Release:	2
+Version:	2.6.2
+Release:	1
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	b16305c2dbbc53211018ed07364abccf
+# Source0-md5:	c29f5993ae05d981769d2002a9f65d2a
 Patch0:		%{name}-pwd.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
