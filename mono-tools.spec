@@ -26,8 +26,8 @@ BuildRequires:	gettext-devel
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
-BuildRequires:	mono-devel >= 2.6
-BuildRequires:	mono-monodoc >= 2.6
+BuildRequires:	mono-devel >= 2.8
+BuildRequires:	mono-monodoc >= 2.8
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
