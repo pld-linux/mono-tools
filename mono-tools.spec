@@ -6,13 +6,13 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	2.6.2
+Version:	2.8
 Release:	1
 License:	GPL v2
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	c29f5993ae05d981769d2002a9f65d2a
+# Source0-md5:	81d17ee2584acdbc5cfee01adb905e50
 Patch0:		%{name}-pwd.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
@@ -27,7 +27,6 @@ BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
 BuildRequires:	mono-devel >= 2.6
-BuildRequires:	mono-jscript
 BuildRequires:	mono-monodoc >= 2.6
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
@@ -162,7 +161,7 @@ zawartości.
 %patch0 -p1
 
 # as expected by ilcontrast script
-sed -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
+%{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
 
 %build
 %{__aclocal}
