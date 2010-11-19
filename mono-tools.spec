@@ -32,6 +32,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
 Requires:	mono-tools-html-renderer
+Requires:	mono >= 2.8
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -199,7 +200,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/gsharp
 %attr(755,root,root) %{_prefix}/lib/gsharp/gsharp.exe
 %{_prefix}/lib/gsharp/gsharp.exe.config
-#%%attr(755,root,root) %{_prefix}/lib/mono/1.0/gasnview.exe
+%attr(755,root,root) %{_prefix}/lib/mono/2.0/gasnview.exe
 %{_prefix}/lib/create-native-map
 %dir %{_prefix}/lib/minvoke
 %attr(755,root,root) %{_prefix}/lib/minvoke/minvoke.exe
