@@ -7,8 +7,8 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.8
-Release:	1
-License:	GPL v2
+Release:	2
+License:	GPL v2+
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
@@ -163,6 +163,9 @@ zawartości.
 # as expected by ilcontrast script
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
 
+# mono-2.8 path for gasnview.exe
+%{__sed} -i -e 's,mono/1.0,mono/2.0,' asn1view/gtk/Makefile.am
+
 %build
 %{__aclocal}
 %{__autoconf}
@@ -196,7 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/gsharp
 %attr(755,root,root) %{_prefix}/lib/gsharp/gsharp.exe
 %{_prefix}/lib/gsharp/gsharp.exe.config
-%attr(755,root,root) %{_prefix}/lib/mono/1.0/gasnview.exe
+#%%attr(755,root,root) %{_prefix}/lib/mono/1.0/gasnview.exe
 %{_prefix}/lib/create-native-map
 %dir %{_prefix}/lib/minvoke
 %attr(755,root,root) %{_prefix}/lib/minvoke/minvoke.exe
