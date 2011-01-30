@@ -23,6 +23,7 @@ BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
@@ -31,8 +32,8 @@ BuildRequires:	mono-monodoc >= 2.8
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
-Requires:	mono-tools-html-renderer
 Requires:	mono >= 2.8
+Requires:	mono-tools-html-renderer
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
