@@ -6,13 +6,13 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	2.8
-Release:	2
+Version:	2.10
+Release:	1
 License:	GPL v2+
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	81d17ee2584acdbc5cfee01adb905e50
+# Source0-md5:	da178df2c119c696c08c09dc9eb01994
 Patch0:		%{name}-pwd.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
@@ -27,12 +27,12 @@ BuildRequires:	glib2-devel
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
-BuildRequires:	mono-devel >= 2.8
-BuildRequires:	mono-monodoc >= 2.8
+BuildRequires:	mono-devel >= 2.10
+BuildRequires:	mono-monodoc >= 2.10
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
-Requires:	mono >= 2.8
+Requires:	mono >= 2.10
 Requires:	mono-tools-html-renderer
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -101,7 +101,7 @@ Oparty na GtkHTML wyświetlacz HTML-a dla monodoc.
 Summary:	A tool to find problems in .NET applications and libraries
 Summary(pl.UTF-8):	Narzędzie znajdujące problemy w aplikacjach i bibliotekach .NET
 Group:		Development/Tools
-Requires:	monodoc >= 2.6
+Requires:	monodoc >= 2.10
 
 %description gendarme
 Gendarme is a extensible rule-based tool to find problems in .NET
@@ -210,7 +210,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/mperfmon/mperfmon.exe
 %dir %{_prefix}/lib/mono-tools
 %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll
+%exclude %{_libdir}/mono-tools/Mono.Profiler.Widgets.dll.mdb
 %attr(755,root,root) %{_prefix}/lib/mono-tools/emveepee.exe
+%exclude %{_libdir}/mono-tools/emveepee.exe.mdb
 %attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
 %{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
@@ -244,6 +246,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gendarme
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gd2i
 %attr(755,root,root) %{_bindir}/gendarme
 %attr(755,root,root) %{_bindir}/gendarme-wizard
 %{_prefix}/lib/gendarme
@@ -252,6 +255,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/gendarme-wizard.desktop
 %{_pkgconfigdir}/gendarme-framework.pc
 %{_pixmapsdir}/gendarme.svg
+%{_mandir}/man1/gd2i.1*
 %{_mandir}/man1/gendarme.1*
 %{_mandir}/man5/gendarme.5*
 
