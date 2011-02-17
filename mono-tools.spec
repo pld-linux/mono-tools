@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.10
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
@@ -210,9 +210,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/mperfmon/mperfmon.exe
 %dir %{_prefix}/lib/mono-tools
 %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll
-%exclude %{_libdir}/mono-tools/Mono.Profiler.Widgets.dll.mdb
+%exclude %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll.mdb
 %attr(755,root,root) %{_prefix}/lib/mono-tools/emveepee.exe
-%exclude %{_libdir}/mono-tools/emveepee.exe.mdb
+%exclude %{_prefix}/lib/mono-tools/emveepee.exe.mdb
 %attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
 %{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
