@@ -1,19 +1,20 @@
 #
 # Conditional build:
-%bcond_without	gecko		# don't build gecko html renderer
+%bcond_with	gecko		# don't build gecko html renderer
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.10
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Development/Tools
 # latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
 Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
 # Source0-md5:	da178df2c119c696c08c09dc9eb01994
 Patch0:		%{name}-pwd.patch
+Patch1:		%{name}-configure.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -32,8 +33,10 @@ BuildRequires:	mono-monodoc >= 2.10
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
+Requires:	hicolor-icon-theme
 Requires:	mono >= 2.10
 Requires:	mono-tools-html-renderer
+Obsoletes:	mono-tools-gtkhtml
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -83,19 +86,6 @@ Mono.WebBrowser based monodoc HTML renderer.
 
 %description monowebbrowser -l pl.UTF-8
 Oparty na Mono.WebBrowser wyświetlacz HTML-a dla monodoc.
-
-%package gtkhtml
-Summary:	GtkHTML based monodoc HTML renderer
-Summary(pl.UTF-8):	Oparty na GtkHTML wyświetlacz HTML-a dla monodoc
-Group:		Development/Tools
-Requires:	%{name} = %{version}-%{release}
-Provides:	mono-tools-html-renderer
-
-%description gtkhtml
-GtkHTML based monodoc HTML renderer.
-
-%description gtkhtml -l pl.UTF-8
-Oparty na GtkHTML wyświetlacz HTML-a dla monodoc.
 
 %package gendarme
 Summary:	A tool to find problems in .NET applications and libraries
@@ -161,6 +151,7 @@ zawartości.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 # as expected by ilcontrast script
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
@@ -188,6 +179,12 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+%update_icon_cache hicolor
+
+%postun
+%update_icon_cache hicolor
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
@@ -195,6 +192,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/emveepee
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gsharp
+%attr(755,root,root) %{_bindir}/ilcontrast
 %attr(755,root,root) %{_bindir}/minvoke
 %attr(755,root,root) %{_bindir}/monodoc
 %attr(755,root,root) %{_bindir}/mperfmon
@@ -203,6 +201,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/gsharp/gsharp.exe.config
 %attr(755,root,root) %{_prefix}/lib/mono/2.0/gasnview.exe
 %{_prefix}/lib/create-native-map
+%dir %{_prefix}/lib/ilcontrast
+%attr(755,root,root) %{_prefix}/lib/ilcontrast/ilcontrast.exe
 %dir %{_prefix}/lib/minvoke
 %attr(755,root,root) %{_prefix}/lib/minvoke/minvoke.exe
 %dir %{_prefix}/lib/mperfmon
@@ -216,8 +216,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
 %{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
+%{_desktopdir}/ilcontrast.desktop
 %{_desktopdir}/monodoc.desktop
+%{_pixmapsdir}/ilcontrast.png
 %{_pixmapsdir}/monodoc.png
+%{_iconsdir}/hicolor/*/*/*.png
 %{_pkgconfigdir}/create-native-map.pc
 %{_mandir}/man1/create-native-map.1*
 %{_mandir}/man1/mperfmon.1*
@@ -239,10 +242,6 @@ rm -rf $RPM_BUILD_ROOT
 %files monowebbrowser
 %defattr(644,root,root,755)
 %{_prefix}/lib/monodoc/MonoWebBrowserHtmlRender.dll
-
-%files gtkhtml
-%defattr(644,root,root,755)
-%{_prefix}/lib/monodoc/GtkHtmlHtmlRender.dll
 
 %files gendarme
 %defattr(644,root,root,755)

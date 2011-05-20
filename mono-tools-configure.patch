@@ -1,0 +1,30 @@
+--- mono-tools-2.10/configure.in.orig	2011-05-20 23:33:52.523488704 +0200
++++ mono-tools-2.10/configure.in	2011-05-20 23:34:59.173127631 +0200
+@@ -62,27 +62,12 @@ fi
+ AC_SUBST(GNOME_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_GNOME, test "x$enable_gnome" = "xyes")
+ 
+-PKG_CHECK_MODULES(GTKHTML_SHARP, gtkhtml-sharp-3.14, enable_gtkhtml=yes, enable_gtkhtml=no)
+-if test "x$enable_gtkhtml" = "xyes"; then
+-	CSHARP_FLAGS="-d:GTKHTML_SHARP_3_14 $CSHARP_FLAGS"
+-else
+-	PKG_CHECK_MODULES(GTKHTML_SHARP, gtkhtml-sharp-2.0, enable_gtkhtml=yes, enable_gtkhtml=no)
+-fi
+-AC_SUBST(GTKHTML_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_GTKHTML, test "x$enable_gtkhtml" = "xyes")
+ 
+ AC_SUBST(CSHARP_FLAGS)
+ 
+-PKG_CHECK_MODULES(GECKO_SHARP, gecko-sharp-2.0, enable_gecko=yes, enable_gecko=no)
+-AC_SUBST(GECKO_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_GECKO, test "x$enable_gecko" = "xyes")
+ 
+-if test "x$enable_gecko" = "xyes"; then
+-   # get the mozilla home directory
+-   MOZILLA_HOME="`$PKG_CONFIG --variable=libdir mozilla-gtkmozembed`"
+-   AC_SUBST(MOZILLA_HOME)
+-fi
+-
+ PKG_CHECK_MODULES(WEBKIT_SHARP, webkit-sharp-1.0, enable_webkit=yes, enable_webkit=no)
+ AC_SUBST(WEBKIT_SHARP_LIBS)
+ AM_CONDITIONAL(ENABLE_WEBKIT, test "x$enable_webkit" = "xyes")
