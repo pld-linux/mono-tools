@@ -1,3 +1,4 @@
+# NOTE: 2.11 tarball is broken
 #
 # Conditional build:
 %bcond_with	gecko		# don't build gecko html renderer
@@ -10,11 +11,12 @@ Version:	2.10
 Release:	3
 License:	GPL v2+
 Group:		Development/Tools
-# latest downloads summary at http://ftp.novell.com/pub/mono/sources-stable/
-Source0:	http://ftp.novell.com/pub/mono/sources/mono-tools/%{name}-%{version}.tar.bz2
+Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 # Source0-md5:	da178df2c119c696c08c09dc9eb01994
 Patch0:		%{name}-pwd.patch
 Patch1:		%{name}-configure.patch
+Patch2:		%{name}-am.patch
+Patch3:		%{name}-mono3.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -152,6 +154,8 @@ zawartości.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 # as expected by ilcontrast script
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am

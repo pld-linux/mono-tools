@@ -1,0 +1,72 @@
+--- mono-tools-2.10/Mono.Profiler/Mono.Profiler.Widgets/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/Mono.Profiler.Widgets/Makefile.am	2013-09-29 21:57:59.331555089 +0200
+@@ -9,7 +9,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+ CLEANFILES = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+--- mono-tools-2.10/Mono.Profiler/heap-snapshot-explorer/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/heap-snapshot-explorer/Makefile.am	2013-09-29 21:59:02.694493316 +0200
+@@ -9,7 +9,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+ CLEANFILES = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+--- mono-tools-2.10/Mono.Profiler/heap-snapshot-viewer/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/heap-snapshot-viewer/Makefile.am	2013-09-29 21:59:27.985666109 +0200
+@@ -8,7 +8,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ bin_SCRIPTS = mprof-heap-viewer
+ man_MANS=man/man1/mprof-heap-viewer.1
+ 
+--- mono-tools-2.10/Mono.Profiler/mprof-gui/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/mprof-gui/Makefile.am	2013-09-29 22:00:02.557269251 +0200
+@@ -8,7 +8,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ bin_SCRIPTS = emveepee
+ 
+ CLEANFILES = $(ASSEMBLY) $(ASSEMBLY_MDB)
+--- mono-tools-2.10/Mono.Profiler/profiler-decoder-library/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/profiler-decoder-library/Makefile.am	2013-09-30 18:44:47.911443506 +0200
+@@ -9,7 +9,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+ CLEANFILES = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ 
+--- mono-tools-2.10/Mono.Profiler/profiler-file-decoder/Makefile.am.orig	2011-02-12 17:32:47.000000000 +0100
++++ mono-tools-2.10/Mono.Profiler/profiler-file-decoder/Makefile.am	2013-09-30 18:45:34.606945410 +0200
+@@ -9,7 +9,8 @@
+ ASSEMBLY_MDB = 
+ endif
+ 
+-pkglib_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
++assdir = $(pkglibdir)
++ass_DATA = $(ASSEMBLY) $(ASSEMBLY_MDB)
+ bin_SCRIPTS = mprof-decoder
+ man_MANS = man/man1/mprof-decoder.1 
+ 
