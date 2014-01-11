@@ -1,4 +1,4 @@
-# NOTE: 2.11 tarball is broken
+# NOTE: upstream 2.11 tarball is broken; it seems 2.11 isn't finished yet
 #
 # Conditional build:
 %bcond_with	gecko		# don't build gecko html renderer
@@ -8,15 +8,15 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	2.10
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		Development/Tools
 Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.bz2
 # Source0-md5:	da178df2c119c696c08c09dc9eb01994
-Patch0:		%{name}-pwd.patch
-Patch1:		%{name}-configure.patch
-Patch2:		%{name}-am.patch
-Patch3:		%{name}-mono3.patch
+Patch0:		%{name}-git-partial.diff
+Patch1:		%{name}-pwd.patch
+Patch2:		%{name}-configure.patch
+Patch3:		%{name}-sdkver.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -31,7 +31,7 @@ BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
 BuildRequires:	mono-devel >= 2.10
-BuildRequires:	mono-monodoc >= 2.10
+BuildRequires:	mono-monodoc >= 3.2.5-2
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
@@ -164,6 +164,7 @@ zawartości.
 %{__sed} -i -e 's,mono/1.0,mono/2.0,' asn1view/gtk/Makefile.am
 
 %build
+%{__glib_gettextize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -175,8 +176,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkglibdir=%{_prefix}/lib/mono-tools \
-	pkgconfigdir=%{_pkgconfigdir}
+	pkgconfigdir=%{_pkgconfigdir} \
+	pkglibdir=%{_prefix}/lib/mono-tools
+
+# debug
+%{__rm} $RPM_BUILD_ROOT%{_prefix}/lib/mono-tools/{Mono.Profiler.Widgets.dll,emveepee.exe}.mdb
 
 %find_lang %{name}
 
@@ -214,9 +218,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/mperfmon/mperfmon.exe
 %dir %{_prefix}/lib/mono-tools
 %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll
-%exclude %{_prefix}/lib/mono-tools/Mono.Profiler.Widgets.dll.mdb
 %attr(755,root,root) %{_prefix}/lib/mono-tools/emveepee.exe
-%exclude %{_prefix}/lib/mono-tools/emveepee.exe.mdb
 %attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
 %{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
@@ -224,7 +226,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/monodoc.desktop
 %{_pixmapsdir}/ilcontrast.png
 %{_pixmapsdir}/monodoc.png
-%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/hicolor/*x*/apps/monodoc.png
 %{_pkgconfigdir}/create-native-map.pc
 %{_mandir}/man1/create-native-map.1*
 %{_mandir}/man1/mperfmon.1*
