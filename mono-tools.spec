@@ -1,32 +1,34 @@
-# NOTE: upstream 2.11 tarball is broken; it seems 2.11 isn't finished yet
 #
 # Conditional build:
-%bcond_with	gecko		# don't build gecko html renderer
+%bcond_with	gecko		# gecko html renderer
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	2.10
-Release:	6
+Version:	3.10
+Release:	1
 License:	GPL v2+
 Group:		Development/Tools
-Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.bz2
-# Source0-md5:	da178df2c119c696c08c09dc9eb01994
-Patch0:		%{name}-git-partial.diff
+#Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.gz
+# 3.10 tarball is broken, temporarily use github
+Source0:	https://github.com/mono/mono-tools/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	8df1eed41d5ff6dc6d48541f1c593319
+Patch0:		%{name}-build.patch
 Patch1:		%{name}-pwd.patch
 Patch2:		%{name}-configure.patch
 Patch3:		%{name}-sdkver.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dotnet-gconf-sharp-devel >= 2.16.0
 %{?with_gecko:BuildRequires:	dotnet-gecko-sharp2-devel >= 0.12}
-BuildRequires:	dotnet-gnome-desktop-sharp-devel
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+# gtk-sharp-2.0, glade-sharp-2.0
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel
+BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
