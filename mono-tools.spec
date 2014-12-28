@@ -27,7 +27,7 @@ BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 # gtk-sharp-2.0, glade-sharp-2.0
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
