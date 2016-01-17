@@ -6,18 +6,16 @@
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
-Version:	3.10
+Version:	4.2
 Release:	1
 License:	GPL v2+
 Group:		Development/Tools
-#Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.gz
-# 3.10 tarball is broken, temporarily use github
-Source0:	https://github.com/mono/mono-tools/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8df1eed41d5ff6dc6d48541f1c593319
-Patch0:		%{name}-build.patch
-Patch1:		%{name}-pwd.patch
-Patch2:		%{name}-configure.patch
-Patch3:		%{name}-sdkver.patch
+# also available on github
+#Source0:	https://github.com/mono/mono-tools/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.tar.gz
+# Source0-md5:	d4b7c711ff8295173766c44973c6c10e
+Patch0:		%{name}-pwd.patch
+Patch1:		%{name}-configure.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -156,13 +154,11 @@ zawartości.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 # as expected by ilcontrast script
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
 
-# mono-2.8 path for gasnview.exe
+# mono-2.8+ path for gasnview.exe
 %{__sed} -i -e 's,mono/1.0,mono/2.0,' asn1view/gtk/Makefile.am
 
 %build
