@@ -7,7 +7,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	4.2
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Development/Tools
 # also available on github
@@ -30,17 +30,22 @@ BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libgdiplus
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-csharp
-BuildRequires:	mono-devel >= 2.10
+BuildRequires:	mono-devel >= 4.0
 BuildRequires:	mono-monodoc >= 3.2.5-2
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.730
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
 Requires:	hicolor-icon-theme
 Requires:	mono >= 2.10
 Requires:	mono-tools-html-renderer
 Obsoletes:	mono-tools-gtkhtml
+ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 ia64 mips ppc ppc64 s390x sparc sparcv9 sparc64
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# provided in private directory
+%define		_noautoreq_mono	Gendarme.Framework Gendarme.Rules.Performance
 
 %description
 Mono Tools is a collection of development and testing programs and
@@ -159,7 +164,7 @@ zawartości.
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
 
 # mono-2.8+ path for gasnview.exe
-%{__sed} -i -e 's,mono/1.0,mono/2.0,' asn1view/gtk/Makefile.am
+%{__sed} -i -e 's,mono/1.0,mono/4.5,' asn1view/gtk/Makefile.am
 
 %build
 %{__glib_gettextize}
@@ -205,7 +210,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/gsharp
 %attr(755,root,root) %{_prefix}/lib/gsharp/gsharp.exe
 %{_prefix}/lib/gsharp/gsharp.exe.config
-%attr(755,root,root) %{_prefix}/lib/mono/2.0/gasnview.exe
+%attr(755,root,root) %{_prefix}/lib/mono/4.5/gasnview.exe
 %{_prefix}/lib/create-native-map
 %dir %{_prefix}/lib/ilcontrast
 %attr(755,root,root) %{_prefix}/lib/ilcontrast/ilcontrast.exe
