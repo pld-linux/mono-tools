@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_with	gecko		# gecko html renderer
 #
-%include	/usr/lib/rpm/macros.mono
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
