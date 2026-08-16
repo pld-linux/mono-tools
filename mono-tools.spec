@@ -1,12 +1,16 @@
 #
+# managed dotnet code, no native debug sources
+%undefine	_debugsource_packages
+#
 # Conditional build:
 %bcond_with	gecko		# gecko html renderer
+%bcond_with	webkit		# WebKit html renderer (needs WebKitGTK 1.x)
 #
 Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	4.2
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Development/Tools
 # also available on github
@@ -15,6 +19,8 @@ Source0:	http://download.mono-project.com/sources/mono-tools/%{name}-%{version}.
 # Source0-md5:	d4b7c711ff8295173766c44973c6c10e
 Patch0:		%{name}-pwd.patch
 Patch1:		%{name}-configure.patch
+Patch2:		%{name}-nunit.patch
+Patch3:		%{name}-sharpziplib.patch
 URL:		http://www.mono-project.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -23,7 +29,7 @@ BuildRequires:	dotnet-gconf-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 # gtk-sharp-2.0, glade-sharp-2.0
 BuildRequires:	dotnet-gtk-sharp2-devel
-BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1
+%{?with_webkit:BuildRequires:	dotnet-webkit-sharp-devel >= 0.2-1}
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libgdiplus
@@ -158,6 +164,8 @@ zawartości.
 %setup -q
 %patch -P0 -p1
 %patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
 
 # as expected by ilcontrast script
 %{__sed} -i -e 's,\$(libdir)/ilcontrast,$(prefix)/lib/ilcontrast,' ilcontrast/Makefile.am
@@ -202,7 +210,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/emveepee
 %attr(755,root,root) %{_bindir}/gasnview
 %attr(755,root,root) %{_bindir}/gsharp
-%attr(755,root,root) %{_bindir}/ilcontrast
 %attr(755,root,root) %{_bindir}/minvoke
 %attr(755,root,root) %{_bindir}/monodoc
 %attr(755,root,root) %{_bindir}/mperfmon
@@ -211,8 +218,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/gsharp/gsharp.exe.config
 %attr(755,root,root) %{_prefix}/lib/mono/4.5/gasnview.exe
 %{_prefix}/lib/create-native-map
-%dir %{_prefix}/lib/ilcontrast
-%attr(755,root,root) %{_prefix}/lib/ilcontrast/ilcontrast.exe
 %dir %{_prefix}/lib/minvoke
 %attr(755,root,root) %{_prefix}/lib/minvoke/minvoke.exe
 %dir %{_prefix}/lib/mperfmon
@@ -224,28 +229,32 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/lib/monodoc/browser.exe
 %{_prefix}/lib/monodoc/web
 %{_desktopdir}/gsharp.desktop
-%{_desktopdir}/ilcontrast.desktop
 %{_desktopdir}/monodoc.desktop
-%{_pixmapsdir}/ilcontrast.png
 %{_pixmapsdir}/monodoc.png
 %{_iconsdir}/hicolor/*x*/apps/monodoc.png
 %{_pkgconfigdir}/create-native-map.pc
 %{_mandir}/man1/create-native-map.1*
+%if %{with gecko} || %{with webkit}
+# only built when an embedded HTML renderer is available
+%attr(755,root,root) %{_bindir}/ilcontrast
+%dir %{_prefix}/lib/ilcontrast
+%attr(755,root,root) %{_prefix}/lib/ilcontrast/ilcontrast.exe
+%{_desktopdir}/ilcontrast.desktop
+%{_pixmapsdir}/ilcontrast.png
+%endif
 %{_mandir}/man1/mperfmon.1*
 
 %if %{with gecko}
 %files gecko
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ilcontrast
-%{_prefix}/lib/ilcontrast
 %{_prefix}/lib/monodoc/GeckoHtmlRender.dll
-%{_desktopdir}/ilcontrast.desktop
-%{_pixmapsdir}/ilcontrast.png
 %endif
 
+%if %{with webkit}
 %files webkit
 %defattr(644,root,root,755)
 %{_prefix}/lib/monodoc/WebKitHtmlRender.dll
+%endif
 
 %files monowebbrowser
 %defattr(644,root,root,755)

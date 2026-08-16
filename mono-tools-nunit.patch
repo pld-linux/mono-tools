@@ -1,0 +1,41 @@
+Drop the nunit build dependency.
+
+mono 6.x no longer bundles nunit, so mono-nunit.pc is gone and configure
+aborts.  Nothing that gets installed needs it: upstream hangs Test.Rules.dll
+(test-only scaffolding, never installed) off "all" instead of "test", and
+asn1view passes NUNIT_LIBS despite containing no NUnit code.  Test.Framework.dll
+is already test-only and stays that way.
+
+--- mono-tools-4.2/configure.in
++++ mono-tools-4.2/configure.in
+@@ -42,8 +42,6 @@
+ AC_SUBST(GACUTIL)
+ 
+ 
+-PKG_CHECK_MODULES(NUNIT, mono-nunit)
+-AC_SUBST(NUNIT_LIBS)
+ 
+ PKG_CHECK_MODULES(MONODOC, monodoc)
+ AC_SUBST(MONODOC_LIBS)
+--- mono-tools-4.2/asn1view/gtk/Makefile.am
++++ mono-tools-4.2/asn1view/gtk/Makefile.am
+@@ -5,7 +5,7 @@
+ #   Gonzalo Paniagua Javier (gonzalo@ximian.com)
+ #   Martin Willemoes Hansen (mwh@sysrq.dk>
+ #
+-local_flags = -debug+ -debug:full -nologo $(NUNIT_LIBS)
++local_flags = -debug+ -debug:full -nologo
+ 
+ local_flags += $(MCSFLAGS) $(GTK_SHARP_LIBS) $(GNOME_SHARP_LIBS)
+ 
+--- mono-tools-4.2/gendarme/rules/Test.Rules/Makefile.am
++++ mono-tools-4.2/gendarme/rules/Test.Rules/Makefile.am
+@@ -27,7 +27,7 @@
+ $(common_tests): $(test_build_sources) $(framework)
+ 	$(MCS) -target:library $(TESTS_OPTIONS) -pkg:mono-nunit -r:$(CECIL_ASM) -r:$(framework) -out:$@ $(test_build_sources)
+ 
+-all: $(common_tests)
++all:
+ 
+ test: $(common_tests)
+ 

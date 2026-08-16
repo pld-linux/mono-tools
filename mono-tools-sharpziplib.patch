@@ -1,0 +1,70 @@
+Read the definitions zip with System.IO.Compression instead of SharpZipLib.
+
+mono 6 marks its bundled ICSharpCode.SharpZipLib [Obsolete], and gendarme
+builds with -warnaserror+, so the three uses here break the build.  The
+framework's own ZipArchive is supported and does the same job; entries get
+their own stream rather than sharing the sequential one.
+
+--- mono-tools-4.2/gendarme/rules/Gendarme.Rules.Portability/MonoCompatibilityReviewRule.cs
++++ mono-tools-4.2/gendarme/rules/Gendarme.Rules.Portability/MonoCompatibilityReviewRule.cs
+@@ -43,7 +43,7 @@
+ using Gendarme.Framework.Helpers;
+ using Gendarme.Framework.Rocks;
+ 
+-using ICSharpCode.SharpZipLib.Zip;
++using System.IO.Compression;
+ 
+ using MoMA.Analyzer.MoMAWebService;
+ 
+@@ -175,23 +175,24 @@
+ 			if (!File.Exists (filename))
+ 				return;
+ 
+-			using (FileStream fs = File.OpenRead (filename)) 
+-			using (ZipInputStream zs = new ZipInputStream (fs))
+-			using (StreamLineReader sr = new StreamLineReader (zs)) {
+-				ZipEntry ze;
+-				while ((ze = zs.GetNextEntry ()) != null) {
+-					switch (ze.Name) {
+-					case "exception.txt":
+-						NotImplementedInternal = Read (sr);
+-						break;
+-					case "missing.txt":
+-						MissingInternal = Read (sr);
+-						break;
+-					case "monotodo.txt":
+-						TodoInternal = ReadWithComments (sr);
+-						break;
+-					default:
+-						break;
++			using (FileStream fs = File.OpenRead (filename))
++			using (ZipArchive za = new ZipArchive (fs, ZipArchiveMode.Read)) {
++				foreach (ZipArchiveEntry ze in za.Entries) {
++					using (Stream es = ze.Open ())
++					using (StreamLineReader sr = new StreamLineReader (es)) {
++						switch (ze.Name) {
++						case "exception.txt":
++							NotImplementedInternal = Read (sr);
++							break;
++						case "missing.txt":
++							MissingInternal = Read (sr);
++							break;
++						case "monotodo.txt":
++							TodoInternal = ReadWithComments (sr);
++							break;
++						default:
++							break;
++						}
+ 					}
+ 				}
+ 			}
+--- mono-tools-4.2/gendarme/rules/Gendarme.Rules.Portability/Makefile.am
++++ mono-tools-4.2/gendarme/rules/Gendarme.Rules.Portability/Makefile.am
+@@ -1,6 +1,6 @@
+ include ../common.make
+ 
+-EXTRA_RULES_OPTIONS += -r:ICSharpCode.SharpZipLib.dll -r:System.Web.Services.dll
++EXTRA_RULES_OPTIONS += -r:System.IO.Compression.dll -r:System.Web.Services.dll
+ 
+ rules_sources =  \
+ 	DoNotHardcodePathsRule.cs \
