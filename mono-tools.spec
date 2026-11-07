@@ -10,7 +10,7 @@ Summary:	Mono Tools
 Summary(pl.UTF-8):	Narzędzia do mono
 Name:		mono-tools
 Version:	4.2
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		Development/Tools
 # also available on github
